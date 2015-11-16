@@ -1,0 +1,349 @@
+<div class="row">
+    <div class="col-md-12">
+        <!-- Custom Tabs -->
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab_1" target="_self" data-toggle="tab">Despacho</a></li>
+                <li><a href="#tab_2" data-toggle="tab" target="_self">Recepción</a></li>
+                <li><a href="#tab_3" data-toggle="tab" target="_self">Traslados</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab_1">
+                    <div>
+                        <div class="row">
+                            <div class="col-md-10" id="gridOperative">
+                                <ngx-grid-view ngx-settings="gridOperativeSettings" ngx-on-row-double-click="selectIncident(event)"></ngx-grid-view>
+                            </div>
+                            <div class="col-md-2" id="gridMobiles">
+                                <ngx-grid-view ngx-settings="gridMobileSettings"></ngx-grid-view>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.tab-pane -->
+                <div class="tab-pane" id="tab_2">
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                            <div class="text-center">
+                                <a class="btn btn-social-icon btn-recepcion"><i class="fa fa-plus" ng-click="newIncident()"></i></a>
+                                <a class="btn btn-social-icon btn-recepcion"><i class="fa fa-times"></i></a>
+                                <a class="btn btn-social-icon btn-recepcion"><i class="fa fa-pencil-square-o"></i></a>
+                                <a class="btn btn-social-icon btn-recepcion"><i class="fa fa-refresh"></i></a>
+                                <a class="btn btn-social-icon btn-recepcion" ng-click="firstIncident()"><i class="fa fa-step-backward"></i></a>
+                                <a class="btn btn-social-icon btn-recepcion" ng-click="previousIncident()"><i class="fa fa-backward"></i></a>
+                                <a class="btn btn-social-icon btn-recepcion" ng-click="nextIncident()"><i class="fa fa-step-forward"></i></a>
+                                <a class="btn btn-social-icon btn-recepcion" ng-click="lastIncident()"><i class="fa fa-forward"></i></a>
+                                <a class="btn btn-social-icon btn-recepcion"><i class="fa fa-users"></i></a>
+                                <a class="btn btn-social-icon btn-recepcion"><i class="fa fa-print"></i></a>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <form name="receptionForm" novalidate>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group-sm">
+                                            <label for="txtFechaIncidente">Fecha Inc.</label>
+                                            <p class="input-group">
+                                                <input type="text" class="form-control input-sm" uib-datepicker-popup="{{dateFormat}}" ng-model="incident.FechaIncidente" is-open="status.opened" min-date="minDate" max-date="maxDate" close-text="Close" id="txtFechaIncidente" />
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-sm" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                </span>
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group-sm">
+                                            <label for="txtNroIncidente">Nro. Inc.</label>
+                                            <input class="form-control input-sm" type="text" id="txtNroIncidente" placeholder="Nro. de incidente" ng-model="incident.NroIncidente" />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group-sm">
+                                            <label for="txtTelefono">Tel&eacute;fono</label>
+                                            <input class="form-control input-sm" id="txtTelefono" type="text" placeholder="Telefono" ng-model="incident.Telefono" />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group-sm">
+                                            <label for="txtCliente">Cliente</label>
+                                            <input class="form-control input-sm" id="txtCliente" type="text" placeholder="Cliente" ng-model="incident.Cliente" />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group-sm">
+                                            <label for="txtNroAfiliado">Nro. Afiliado</label>
+                                            <input class="form-control input-sm" type="text" id="txtNroAfiliado" placeholder="Nro. Afiliado" ng-model="incident.NroAfiliado" />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group-sm">
+                                            <label for="txtAviso">Aviso</label>
+                                            <input class="form-control input-sm" id="txtAviso" type="text" placeholder="Aviso" ng-model="incident.Aviso" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row voffset2">
+                                    <div class="col-md-2">
+                                        <div class="form-group-sm">
+                                            <label for="txtLocalidad">Localidad</label>
+                                            <input class="form-control input-sm" id="txtLocalidad" type="text" placeholder="Localidad" ng-model="incident.Localidad" />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group-sm">
+                                            <label for="txtLocalidadDescripcion">Descripci&oacute;n de Localidad</label>
+                                            <input class="form-control input-sm" type="text" id="txtLocalidadDescripcion" placeholder="Descripcion Localidad" ng-model="incident.LocalidadDescripcion" />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group-sm">
+                                            <label for="txtPartido">Partido</label>
+                                            <input class="form-control input-sm" id="txtPartido" type="text" placeholder="Partido" ng-model="incident.Partido" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row voffset2">
+                                    <div class="col-md-6">
+                                        <div class="form-group-sm">
+                                            <label for="txtCalle">Calle</label>
+
+                                            <input class="form-control input-sm" type="text" placeholder="Calle" id="txtCalle" ng-model="incident.Calle" />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group-sm">
+                                            <label for="txtAltura">Altura</label>
+                                            <input class="form-control input-sm" type="text" placeholder="Altura" ng-model="incident.Altura" id="txtAltura" />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group-sm">
+                                            <label for="txtPiso">Piso</label>
+                                            <input class="form-control input-sm" type="text" placeholder="Piso" ng-model="incident.Piso" id="txtPiso" />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group-sm">
+                                            <label for="txtDepartamento">Departamento</label>
+                                            <input class="form-control input-sm" type="text" placeholder="Departamento" ng-model="incident.Departamento" id="txtDepartamento" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row voffset2">
+                                    <div class="col-md-2">
+                                        <div class="form-group-sm">
+                                            <label for="txtEntreCalle1">Entre Calle 1</label>
+                                            <input class="form-control input-sm" type="text" placeholder="Entre calle 1" ng-model="incident.EntreCalle1" id="txtEntreCalle1" />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group-sm">
+                                            <label for="txtEntreCalle2">Entre Calle 2</label>
+                                            <input class="form-control input-sm" type="text" placeholder="Entre calle 2" ng-model="incident.EntreCalle2" id="txtEntreCalle2" />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group-sm">
+                                            <label for="txtReferencia">Referencia</label>
+                                            <input class="form-control input-sm" type="text" placeholder="Referencias" ng-model="incident.dmReferencia" id="txtReferencia" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row voffset2">
+                                    <div class="col-md-2">
+                                        <div class="form-group-sm">
+                                            <label for="ddSex">Sexo</label>
+                                            <div class="btn-group" uib-dropdown is-open="status.isopen" id="ddSex" style="display:block">
+                                                <button type="button" class="btn btn-primary btn-sm" uib-dropdown-toggle ng-disabled="disabled" ng-model="incident.Sexo">
+                                                    {{incident.Sexo}} <span class="caret"></span>
+                                                </button>
+                                                <ul class="uib-dropdown-menu" role="menu" aria-labelledby="single-button">
+                                                    <li ng-repeat="sex in sexList"><a href="" ng-click="selectSex(sex)">{{sex}}</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group-sm">
+                                            <label for="txtEdad">Edad</label>
+                                            <input class="form-control input-sm" type="text" placeholder="Edad" ng-model="incident.Edad" id="txtEdad" />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group-sm">
+                                            <label for="txtSintomas">Sintomas</label>
+                                            <input class="form-control input-sm" type="text" placeholder="Motivo de llamada - Sintomas" ng-model="incident.Sintomas" id="txtSintomas" />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group-sm">
+                                            <label for="ddGrade">Grado</label>
+                                            <div class="btn-group" uib-dropdown is-open="status.isopen" id="ddGrade" style="display:block">
+                                                <button type="button" class="btn btn-primary btn-sm" uib-dropdown-toggle ng-disabled="disabled" ng-model="incident.AbreviaturaId">
+                                                    {{incident.AbreviaturaId}} <span class="caret"></span>
+                                                </button>
+                                                <ul class="uib-dropdown-menu" role="menu" aria-labelledby="single-button">
+                                                    <li ng-repeat="grade in grades"><a href="" ng-click="selectGrade(grade)">{{grade}}</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row voffset2">
+                                    <div class="col-md-6">
+                                        <div class="form-group-sm">
+                                            <label for="txtPaciente">Paciente</label>
+                                            <input class="form-control input-sm" type="text" placeholder="Paciente" ng-model="incident.Paciente" id="txtPaciente" />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group-sm">
+                                            <label for="ddConditionIva">IVA</label>
+                                            <div class="btn-group" uib-dropdown is-open="status.isopen" id="ddConditionIva" style="display:block">
+                                                <button type="button" class="btn btn-primary btn-sm" uib-dropdown-toggle ng-disabled="disabled" ng-model="incident.IVA">
+                                                    {{incident.IVA}} <span class="caret"></span>
+                                                </button>
+                                                <ul class="uib-dropdown-menu" role="menu" aria-labelledby="single-button">
+                                                    <li ng-repeat="condition in conditionsIva"><a href="" ng-click="selectConditionIva(condition)">{{condition}}</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group-sm">
+                                            <label for="ddPlan">Plan</label>
+                                            <div class="btn-group" uib-dropdown is-open="status.isopen" id="ddPlan" style="display:block">
+                                                <button type="button" class="btn btn-primary btn-sm" uib-dropdown-toggle ng-disabled="disabled" ng-model="incident.Plan">
+                                                    {{incident.Plan}} <span class="caret"></span>
+                                                </button>
+                                                <ul class="uib-dropdown-menu" role="menu" aria-labelledby="single-button">
+                                                    <li ng-repeat="plan in plans"><a href="" ng-click="selectPlan(plan)">{{plan}}</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="form-group-sm">
+                                            <label for="txtCopago">CoPago</label>
+                                            <input class="form-control input-sm" type="text" placeholder="Copago" ng-model="incident.Copago" id="txtCopago" />
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="row voffset2">
+
+                                    <div class="col-md-2">
+                                        <div class="form-group-sm">
+                                            <label for="ddCourse">Curso</label>
+                                            <div class="btn-group" uib-dropdown is-open="status.isopen" id="ddCourse" style="display:block">
+                                                <button type="button" class="btn btn-primary btn-sm" uib-dropdown-toggle ng-disabled="disabled" ng-model="incident.Curso">
+                                                    {{incident.Curso}} <span class="caret"></span>
+                                                </button>
+                                                <ul class="uib-dropdown-menu" role="menu" aria-labelledby="single-button">
+                                                    <li ng-repeat="curse in curses"><a href="" ng-click="selectCurse(curses)">{{curse}}</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>                                 
+                                
+
+                                <div class="col-md-1">
+                                    <div class="form-group-sm">
+                                        <label for="txtDiv">Div</label>
+                                        <input class="form-control input-sm" type="text" placeholder="Div" ng-model="incident.Div" id="txtDiv" />
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-2">
+                                    <div class="form-group-sm">
+                                        <label for="ddTurn">Turno</label>
+                                        <div class="btn-group" uib-dropdown is-open="status.isopen" id="ddTurn" style="display:block">
+                                            <button type="button" class="btn btn-primary btn-sm" uib-dropdown-toggle ng-disabled="disabled" ng-model="incident.Turno">
+                                                {{incident.Turno}} <span class="caret"></span>
+                                            </button>
+                                            <ul class="uib-dropdown-menu" role="menu" aria-labelledby="single-button">
+                                                <li ng-repeat="turn in turns"><a href="" ng-click="selectTurn(turn)">{{turn}}</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group-sm">
+                                        <label for="txtDiagnostic">Diagn&oacute;stico / Cierre</label>
+                                        <input class="form-control input-sm" type="text" placeholder="Copago" ng-model="incident.Diagnostic" id="txtDiagnostic" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group-sm">
+                                        <label for="txtPacientDerivedIn">Paciente derivado en...</label>
+                                        <input class="form-control input-sm" type="text" placeholder="Copago" ng-model="incident.PacientDerivedIn" id="txtPacientDerivedIn" />
+                                    </div>
+                                </div>
+                            </div>
+                              <hr/>
+                            <div class="row voffset2">
+                                <div class="form-buttons-incident-group">
+                                    <div class="btn-group" role="group" aria-label="...">
+                                        <button class="btn btn-primary" ng-click="saveIncident()">Guardar cambios</button>
+                                        <button class="btn btn-danger" ng-click="cancelIncident()">Cancelar</button>
+                                    </div>                                                                
+                                </div>
+                            </div>
+                              
+                            </form>
+                        </div>
+                    </div>
+                </div><!-- /.tab-pane -->
+                <div class="tab-pane" id="tab_3">
+                </div><!-- /.tab-pane -->
+            </div><!-- /.tab-content -->
+        </div><!-- nav-tabs-custom -->
+    </div>
+</div>
+<!-- <div class="row">
+    <div class="col-md-6">
+        <div class="box box-success boxNoMargin">
+            <div class="box-header with-border">
+                <h3 class="box-title">Distribución de Servicios</h3>
+            </div>
+            <div class="box-body">
+                <canvas id="doughnut" class="chart chart-doughnut" data="chartDistributionServiceValues" labels="chartDistributionServicesLabels" height="55px"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="box box-success boxNoMargin">
+            <div class="box-header with-border">
+                <h3 class="box-title">Tiempos Operativos</h3>
+            </div>
+            <div class="box-body">
+                <canvas id="line" class="chart chart-line" data="chartOperativeTimesValues" labels="chartOperativeTimesLabels" legend="true" height="33px"></canvas>
+            </div>
+        </div>
+    </div>
+</div> -->
